@@ -21,37 +21,52 @@ riyuuwaminna = \relative g' { \repeat unfold 3 { <g b d>4 } <g b d>8
 chigauyonekedo = \relative c'' { \repeat unfold 3 { <c e g>4 } <c e g>8
                                 <c e a>~<c e a> <c e b'>~<c e b'>
                                 <a=' cs e>8~ | }
-
+aitaiima = \relative fs'' { \repeat unfold 2 { fs8 <a,=' d a'>~<a=' d a'>4 }
+                            fs'=''8 <a,=' d a'=''> }
+yasashiikimini = \relative fs'' { \repeat unfold 3
+                                  { fs8 <b,=' d a'>~<b d a'>4 }
+                                  <b d b'>8~<b d b'> | }
+sakurakissu = \relative d'' { <d a'>4 <fs d'> <fs cs'> <d a'>~ | }
 
 melody = \new Voice = "melody" {
-  \time 4/4
+  \clef treble
   \key d \major
-  \relative d'' {
-    \repeat unfold 2 {
-      \maybelove |
-      r4 \transpose a' a { \kidzukeba \itsudemo } <b,= d>1 |
-    }
-    r4 fs'8 <a, d g>~<a d g>4 fs'8 <a, d a'>~<a d a'>4
-    \kidzukeba \itsudemo <b'=' d>2.
-    \sobaniirukenedo |
-    r4 \kidzukeba \kiraisuki <b=' d fs>2
-    \mousounano |
-    r4 \kidzukeba \itsudemo <b=' d>2.
-    \sobaniirukenedo |
-    r4 \kidzukeba \hosutodemo
-    \mousounano |
-    r2 \sukininateku <g b d>2
-    \riyuuwaminna <g=' c e g=''>2
-    \chigauyonekedo <a=' cs e>1 |
-    \maybelove
+  \time 4/4
+  \repeat unfold 2 {
+    \maybelove |
+    \skip1 \skip1 \skip1
   }
+  \skip1
+  \skip4 \kidzukeba \itsudemo \relative b' { <b d>2. }
+  \sobaniirukenedo |
+  r4 \kidzukeba \kiraisuki \relative b' { <b d fs>2 }
+  \mousounano |
+  r4 \kidzukeba \itsudemo \relative b' { <b d>2. }
+  \sobaniirukenedo |
+  r4 \kidzukeba \hosutodemo
+  \mousounano |
+  r2 \sukininateku \relative g' { <g b d>2 }
+  \riyuuwaminna \relative g' { <g c e g=''>2 }
+  \chigauyonekedo \relative a' { <a cs e>1 } |
+  \maybelove |
+  r4 \aitaiima \skip2 \skip4 \yasashiikimini |
+  \sakurakissu \relative d'' { <d a'>2 }
+}
+
+accompaniment = \new Voice = "accompaniment" {
+  \clef treble
+  \key d \major
+  \time 4/4
+  \repeat unfold 2 {
+    \skip1 |
+    r4 \transpose a' a { \kidzukeba \itsudemo } \relative b { <b d>1 } |
+  }
+  \relative fs' { r4 fs8 <a, d g>~<a d g>4 fs'8 <a, d a'>~<a d a'>4 }
 }
 
 verseZero = \lyricmode {
   KISS  KISS  FALL  IN  LOVE!
-  \repeat unfold 8 { \skip1 }
   MAY -- BE  YOU'RE  MY  LOVE!
-  \repeat unfold 12 { \skip1 }
   kid -- zu -- ke -- ba  it -- su -- de -- mo
   so -- ba  ni  i -- ru  ke -- ne -- do
   HO -- N -- TO  wa  KI -- RAI  SU -- KI
@@ -66,6 +81,10 @@ verseZero = \lyricmode {
   ri -- yu -- u  wa  mi -- n -- na
   chi -- ga -- u  yo  ne  KE -- DO
   MAY -- BE  YOU'RE  MY  LOVE!
+
+  a -- i -- ta -- i  i -- ma
+  ya -- sa -- shi -- i  ki -- mi  ni
+  SA -- KU -- RA  KISSU
 }
 
 chordnames = \new ChordNames {
@@ -83,7 +102,10 @@ chordnames = \new ChordNames {
 \score {
   <<
     \chordnames
-    \melody
+    \new Staff <<
+      \melody
+      \accompaniment
+    >>
     \new Lyrics \lyricsto "melody" {
       \verseZero
     }
