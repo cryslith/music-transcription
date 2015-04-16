@@ -9,7 +9,7 @@ sobaniirukenedo = \relative a' { r8 a | \repeat unfold 4 { <a d g> } <a d g>4
                                  <a d g>8 <a d fs> | }
 hontowa = \kidzukeba
 kiraisu = \relative a' { <a d fs>8\arpeggio e'8~e fs~fs }
-kiraisuki = \relative a' { \kiraisu \grace fs'='' <b,=' d g>~ | }
+kiraisuki = \relative a' { \kiraisu \grace fs'=''8 <b,=' d g>~ | }
 mousounano = \relative a' { <d fs>2 | <a d a'>8\arpeggio fs'~fs
                             <a, e'>~<a e'> <a d>~<a d>4 }
 hosutodemo = \relative a' { \kiraisu fs'=''8 | <b,=' d g>2 }
@@ -27,6 +27,9 @@ yasashiikimini = \relative fs'' { \repeat unfold 3
                                   { fs8 <b,=' d a'>~<b d a'>4 }
                                   <b d b'>8~<b d b'> | }
 sakurakissu = \relative d'' { <d a'>4 <fs d'> <fs cs'> <d a'>~ | }
+tokimeitara = \relative fs'' { fs4 g | <d a'> <fs d'> <fs cs'> <d a'> | }
+harunokoiwa = \relative fs'' { fs4 g | <d a'> <fs d'> <fs cs'>
+                               \grace a8 <d, g b>4~ | }
 
 melody = \new Voice = "melody" {
   \clef treble
@@ -51,6 +54,10 @@ melody = \new Voice = "melody" {
   \maybelove |
   r4 \aitaiima \skip2 \skip4 \yasashiikimini |
   \sakurakissu \relative d'' { <d a'>2 }
+  \tokimeitara | \maybelove |
+  r4 \aitaiima \skip2 \skip4 \yasashiikimini |
+  \sakurakissu \relative d'' { <d a'>2 }
+  \harunokoiwa \relative d'' { <d g b>2 }
 }
 
 accompaniment = \new Voice = "accompaniment" {
@@ -85,6 +92,16 @@ verseZero = \lyricmode {
   a -- i -- ta -- i  i -- ma
   ya -- sa -- shi -- i  ki -- mi  ni
   SA -- KU -- RA  KISSU
+  TO -- KI -- ME -- I -- TA -- RA
+  ran -- man  koi  shi -- yo
+
+  mi -- ra -- i  yo -- ri  mo
+  i -- ma  ga  ka -- n -- ji -- n
+  u -- ru -- wa -- shi
+  ha -- ru  no  ko -- i  wa
+
+  ha -- na -- sa -- ku  o -- to -- me  no
+  bikagu
 }
 
 chordnames = \new ChordNames {
