@@ -30,6 +30,9 @@ sakurakissu = \relative d'' { <d a'>4 <fs d'> <fs cs'> <d a'>~ | }
 tokimeitara = \relative fs'' { fs4 g | <d a'> <fs d'> <fs cs'> <d a'> | }
 harunokoiwa = \relative fs'' { fs4 g | <d a'> <fs d'> <fs cs'>
                                \grace a8 <d, g b>4~ | }
+hanasakuotomeno = \relative a'' { a4 b8 <c, a'>8~<c a'> d~d4
+                                  a'4 b8 <b, a'>8~<b a'> d~d2 }
+bikagu = \relative d'' { d8 <d fs a d>~ }
 
 melody = \new Voice = "melody" {
   \clef treble
@@ -58,6 +61,12 @@ melody = \new Voice = "melody" {
   r4 \aitaiima \skip2 \skip4 \yasashiikimini |
   \sakurakissu \relative d'' { <d a'>2 }
   \harunokoiwa \relative d'' { <d g b>2 }
+  \hanasakuotomeno
+  \bikagu \relative d'' { <d fs a d>4 }
+  \skip2. \skip1 \skip1
+  \maybelove |
+  \skip1 \skip1 \skip1
+  \maybelove |
 }
 
 accompaniment = \new Voice = "accompaniment" {
