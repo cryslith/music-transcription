@@ -1,6 +1,11 @@
 \version "2.14.2"
 \language "english"
 
+\header {
+  title = "Sakura Kiss"
+  composer = "Chieko Ochi"
+}
+
 maybelove = \relative a' { \repeat unfold 3 { <a d g>4 } fs'8 <a, d a'> | }
 kidzuke = \relative a' { <a=' d fs>8\arpeggio e'8~e4 fs8 }
 kidzukeba = \relative a' { \kidzuke <a=' d>8~<a d>4 }
@@ -34,16 +39,16 @@ hanasakuotomeno = \relative a'' { a4 b8 <c, a'>8~<c a'> d~d4
                                   a'4 b8 <b, a'>8~<b a'> d~d2 }
 bigaku = \relative d'' { d8 <d fs a d>~ }
 
-melody = \new Voice = "melody" {
-  \clef treble
-  \key d \major
-  \time 4/4
-  \repeat unfold 2 {
+melodyIntro = \new Voice = "melody_intro" {
+  | \repeat unfold 2 {
     \maybelove |
     \skip1 \skip1 \skip1
   }
-  \skip1
-  \skip4 \kidzukeba \itsudemo \relative b' { <b d>2. }
+  \skip1 |
+}
+
+melody = \new Voice = "melody" {
+  | \skip4 \kidzukeba \itsudemo \relative b' { <b d>2. }
   \sobaniirukenedo |
   r4 \kidzukeba \kiraisuki \relative b' { <b d fs>2 }
   \mousounano |
@@ -63,16 +68,17 @@ melody = \new Voice = "melody" {
   \harunokoiwa \relative d'' { <d g b>2 }
   \hanasakuotomeno
   \bigaku \relative d'' { <d fs a d>4 }
-  \skip2. \skip1 \skip1
+  \skip2. |
+}
+
+melodyOutro = \new Voice = "melody_outro" {
+  | \skip1 \skip1
   \maybelove |
   \skip1 \skip1 \skip1
   \maybelove |
 }
 
 accompaniment = \new Voice = "accompaniment" {
-  \clef treble
-  \key d \major
-  \time 4/4
   \repeat unfold 2 {
     \skip1 |
     r4 \transpose a' a { \kidzukeba \itsudemo } \relative b { <b d>1 } |
@@ -80,9 +86,12 @@ accompaniment = \new Voice = "accompaniment" {
   \relative fs' { r4 fs8 <a, d g>~<a d g>4 fs'8 <a, d a'>~<a d a'>4 }
 }
 
-verseZero = \lyricmode {
+introLyricsZero = \lyricmode {
   KISS  KISS  FALL  IN  LOVE!
   MAY -- BE  YOU'RE  MY  LOVE!
+}
+
+verseZero = \lyricmode {
   kid -- zu -- ke -- ba  it -- su -- de -- mo
   so -- ba  ni  i -- ru  ke -- ne -- do
   HO -- N -- TO  wa  KI -- RAI  SU -- KI
@@ -129,9 +138,18 @@ chordnames = \new ChordNames {
   <<
     \chordnames
     \new Staff <<
-      \melody
+      { \clef treble
+        \key d \major
+        \time 4/4
+        \melodyIntro
+        \melody
+        \melodyOutro
+        \bar "|." }
       \accompaniment
     >>
+    \new Lyrics \lyricsto "melody_intro" {
+      \introLyricsZero
+    }
     \new Lyrics \lyricsto "melody" {
       \verseZero
     }
