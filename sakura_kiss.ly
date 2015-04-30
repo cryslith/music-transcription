@@ -39,6 +39,11 @@ hanasakuotomeno = \relative a'' { a4 b8 <c, a'>8~<c a'> d~d4
                                   a'4 b8 <b, a'>8~<b a'> d~d2 }
 bigaku = \relative d'' { d8 <d fs a d>~ }
 
+
+mabushiisorani = \relative g'' { g4. fs8~fs2 fs4 g8 fs8~fs8 e8 e2~ }
+makenai = \relative  d'' { d8~d8 e8 e2. | }
+ima = \relative e'' {e8 a8~ | a1}
+
 melodyIntro = \new Voice = "melody_intro" {
   | \repeat unfold 2 {
     \maybelove |
@@ -82,7 +87,12 @@ melodyTransition = \new Voice = "melody_transition" {
   | \repeat unfold 7 { r1 } |
 }
 
-%melodyBridge = \new Voice = "melody_bridge" {
+melodyBridge = \new Voice = "melody_bridge" {
+  | r2 \mabushiisorani \relative e'' { e8 } \makenai
+  | r2 \mabushiisorani \relative e'' { e4~e2.} \ima
+  | r1
+  | \maybelove |
+}
 
 accompaniment = \new Voice = "accompaniment" {
   \repeat unfold 2 {
@@ -158,6 +168,12 @@ verseOne = \lyricmode {
   shu -- yaku
 }
 
+bridgeLyrics = \lyricmode {
+  ma -- bu -- shi -- i  so -- ra  ni  ma -- ken -- ai
+  o -- mo -- i -- de  tsu -- ku -- rou  i -- ma
+  dan -- zen  koi  shi -- yo
+}
+
 englishVerse = \lyricmode {
   I  see  you  come,  I  watch  you  go
   You  ne -- ver  seem  to  leave  me  though
@@ -205,7 +221,8 @@ chordnames = \new ChordNames {
   <<
     \chordnames
     \new Staff <<
-      { \clef treble
+      {
+        \clef treble
         \key d \major
         \time 4/4
         \melodyIntro
@@ -213,6 +230,7 @@ chordnames = \new ChordNames {
           \melody
           \melodyTransition
         }
+        \melodyBridge
       }
       \accompaniment
     >>
@@ -227,6 +245,9 @@ chordnames = \new ChordNames {
           \verseOne
         }
       >>
+    }
+    \new Lyrics \lyricsto "melody_bridge" {
+      \bridgeLyrics
     }
   >>
 }
