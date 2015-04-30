@@ -65,6 +65,9 @@ melody = \new Voice = "melody" {
   \riyuuwaminna \relative g' { <g c e g=''>2 }
   \chigauyonekedo \relative a' { <a cs e>1 } |
   \maybelove |
+  \once \override Score.RehearsalMark #'self-alignment-X = #LEFT
+  \once \override Score.RehearsalMark #'font-size = #3
+  \mark \markup { \musicglyph #"scripts.segno" }
   r4 \aitaiima \skip2 \skip4 \yasashiikimini |
   \sakurakissu \relative d'' { <d a'>2 }
   \tokimeitara | \maybelove |
@@ -72,7 +75,8 @@ melody = \new Voice = "melody" {
   \sakurakissu \relative d'' { <d a'>2 }
   \harunokoiwa \relative d'' { <d g b>2 }
   \hanasakuotomeno
-  \bigaku \relative d'' { <d fs a d>4 }
+  \mark \markup { "To coda " \musicglyph #"scripts.coda" }
+  \bigaku \bar "||" \relative d'' { <d fs a d>4 }
   \skip2. |
 }
 
@@ -91,7 +95,22 @@ melodyBridge = \new Voice = "melody_bridge" {
   | r2 \mabushiisorani \relative e'' { e8 } \makenai
   | r2 \mabushiisorani \relative e'' { e4~e2.} \ima
   | r1
-  | \maybelove |
+  \once \override Score.RehearsalMark #'self-alignment-X = #-2
+  \mark \markup { "D.S. al Coda" }
+  | \maybelove \bar "||"
+}
+
+melodyCoda = \new Voice = "melody_coda" {
+  \once \override Score.RehearsalMark #'self-alignment-X = #LEFT
+  \once \override Score.RehearsalMark #'font-size = #4
+  \mark \markup { \musicglyph #"scripts.coda" }
+  | \relative d'' { <d fs a d>2 r8 g8~g g fs2 }
+  \hanasakuotomeno
+  \bigaku \relative d'' { <d fs a d>4 } \skip 2. |
+  | \skip1 \skip1
+  \maybelove |
+  \skip1 \skip1 \skip1
+  \maybelove |
 }
 
 accompaniment = \new Voice = "accompaniment" {
@@ -174,6 +193,14 @@ bridgeLyrics = \lyricmode {
   dan -- zen  koi  shi -- yo
 }
 
+codaLyrics = \lyricmode {
+  gaku  YEAH _ _
+  ha -- na -- sa -- ku  o -- to -- me  no
+  bi -- gaku
+  KISS  KISS  FALL  IN  LOVE!
+  MAY -- BE  YOU'RE  MY  LOVE!
+}
+
 englishVerse = \lyricmode {
   I  see  you  come,  I  watch  you  go
   You  ne -- ver  seem  to  leave  me  though
@@ -214,6 +241,9 @@ chordnames = \new ChordNames {
     d\breve g b2.:m a4 a1 g\breve
     c1 g
     \repeat unfold 2 { d1 a g a }
+    g\breve a g c a\breve.
+    d\breve c1 g
+    \repeat unfold 2 { d1 a g a }
   }
 }
 
@@ -231,6 +261,8 @@ chordnames = \new ChordNames {
           \melodyTransition
         }
         \melodyBridge
+        \break
+        \melodyCoda
       }
       \accompaniment
     >>
@@ -248,6 +280,9 @@ chordnames = \new ChordNames {
     }
     \new Lyrics \lyricsto "melody_bridge" {
       \bridgeLyrics
+    }
+    \new Lyrics \lyricsto "melody_coda" {
+      \codaLyrics
     }
   >>
 }
