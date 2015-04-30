@@ -78,6 +78,12 @@ melodyOutro = \new Voice = "melody_outro" {
   \maybelove |
 }
 
+melodyTransition = \new Voice = "melody_transition" {
+  | \repeat unfold 7 { r1 } |
+}
+
+%melodyBridge = \new Voice = "melody_bridge" {
+
 accompaniment = \new Voice = "accompaniment" {
   \repeat unfold 2 {
     \skip1 |
@@ -109,7 +115,7 @@ verseZero = \lyricmode {
 
   a -- i -- ta -- i  i -- ma
   ya -- sa -- shi -- i  ki -- mi  ni
-  SA -- KU -- RA  KISSU
+  sa -- ku -- ra  KISSU
   TO -- KI -- ME -- I -- TA -- RA
   ran -- man  koi  shi -- yo
 
@@ -120,6 +126,67 @@ verseZero = \lyricmode {
 
   ha -- na -- sa -- ku  o -- to -- me  no
   bi -- gaku
+}
+
+verseOne = \lyricmode {
+  ta -- to -- e -- ba  a -- ta  -- shi  no
+  ma -- da  shi -- ra -- na -- i  ki -- mi
+  mit -- su -- ke -- te  mi -- tai  ke -- do
+  kowa -- ku  mo  A -- RU
+
+  DE -- NI -- MU  ni  FU -- RI  -- RU  ni
+  KA  -- JU -- A -- RU  ni  CHAI _ -- NA
+  a -- u -- ta -- bi  shi -- chi  hen _ -- ge
+  kaku -- go  a -- so -- be
+
+  tsu -- gi -- tsu -- gi  hi -- ra -- ku
+  a -- i  no  to -- bi -- ra  wa
+  SU -- RI -- RU  ma -- n -- sa -- i
+  dan -- zen  koi  shi -- yo
+
+  i -- so -- ga -- shi -- ku -- te
+  su --re -- chi -- ga -- u  hi  mo
+  sa -- ku -- ra  KISSU
+  se -- tsu -- na -- i  ho -- do
+  ran -- man  koi  DE -- SU
+
+  yo -- wa -- i  TO -- KO  mo
+  u -- ke -- to -- me  a -- o -- u
+  fu -- re -- a -- u
+  a -- i  wa  mu -- te -- ki
+  sa -- ka -- so -- u  fu -- ta -- ri  wa
+  shu -- yaku
+}
+
+englishVerse = \lyricmode {
+  I  see  you  come,  I  watch  you  go
+  You  ne -- ver  seem  to  leave  me  though
+  So  is  this  hate  or  love,  we'll  see
+  You're  making  me  cra -- zy
+
+  In -- side  my  dreams  you're  all  I  see
+  Well,  all  I  see  is  you  and  me
+  La -- dy  may -- be  or  host,  I _  find
+  I  real -- ly  don't  mind
+
+  If  I  had  to  choose  a  rose
+  In  this  gar -- den  of  ro -- mance
+  May -- be  we  can  take  this  chance,
+  May -- be  you're  my  love!
+
+  And  I  would  like  to  find
+  A  hand  like  yours  to  take  mine
+  And  with  one  kiss
+  We  can  stop  time  and  I'd
+  fall  in  love  with  you
+
+  To -- mor -- row's  far  a -- way
+  Let's  place  our  hope  in  to -- day
+  Just  you  and  me
+  In  a  beau -- ti -- ful  spring
+
+  And  we'll  al -- ways  fall  in  love _
+  again
 }
 
 chordnames = \new ChordNames {
@@ -142,16 +209,24 @@ chordnames = \new ChordNames {
         \key d \major
         \time 4/4
         \melodyIntro
-        \melody
-        \melodyOutro
-        \bar "|." }
+        \repeat volta 2 {
+          \melody
+          \melodyTransition
+        }
+      }
       \accompaniment
     >>
     \new Lyrics \lyricsto "melody_intro" {
       \introLyricsZero
     }
     \new Lyrics \lyricsto "melody" {
-      \verseZero
+      <<
+        \verseZero
+        \new Lyrics {
+          \set associatedVoice = "melody"
+          \verseOne
+        }
+      >>
     }
   >>
 }
