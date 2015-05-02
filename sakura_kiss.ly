@@ -88,7 +88,7 @@ melodyOutro = \new Voice = "melody_outro" {
 }
 
 melodyTransition = \new Voice = "melody_transition" {
-  | \repeat unfold 7 { r1 } |
+  | \repeat unfold 7 { \skip1 } |
 }
 
 melodyBridge = \new Voice = "melody_bridge" {
@@ -113,13 +113,22 @@ melodyCoda = \new Voice = "melody_coda" {
   \maybelove |
 }
 
-accompaniment = \new Voice = "accompaniment" {
+accompanimentIntro = \new Voice = "accompaniment_intro" {
   \repeat unfold 2 {
     \skip1 |
     r4 \transpose a' a { \kidzukeba \itsudemo } \relative b { <b d>1 } |
   }
-  \relative fs' { r4 fs8 <a, d g>~<a d g>4 fs'8 <a, d a'>~<a d a'>4 }
+  r4 \relative fs' { fs8 <a, d g>~<a d g>4 fs'8 <a, d a'>~<a d a'>4 }
+  \skip 2. |
 }
+
+accompanimentTransition = \new Voice = "accompaniment_transition" {
+  r4 \transpose a' a { \kidzukeba \itsudemo } \relative b { <b d>1 } |
+  r4 \relative a { <a d g>8 <a d g>4 <a cs e>4. } |
+  r4 \transpose a' a { \kidzukeba \itsudemo } \relative b { <b d>1 } |
+  r4 \relative fs' { fs8 <a, d g>~<a d g>4 fs'8 <a, d a'> } |
+}
+
 
 introLyricsZero = \lyricmode {
   KISS  KISS  FALL  IN  LOVE!
@@ -264,7 +273,11 @@ chordnames = \new ChordNames {
         \break
         \melodyCoda
       }
-      \accompaniment
+      {
+        \accompanimentIntro
+        \repeat unfold 41 { \skip1 }
+        \accompanimentTransition
+      }
     >>
     \new Lyrics \lyricsto "melody_intro" {
       \introLyricsZero
