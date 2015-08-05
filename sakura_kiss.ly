@@ -87,8 +87,12 @@ melodyOutro = \new Voice = "melody_outro" {
   \maybelove |
 }
 
-melodyTransition = \new Voice = "melody_transition" {
+melodyTransitionZero = \new Voice = "melody_transition_zero" {
   | \repeat unfold 7 { \skip1 } |
+}
+
+melodyTransitionOne = \new Voice = "melody_transition_one" {
+  | \repeat unfold 8 { \skip1 } |
 }
 
 melodyBridge = \new Voice = "melody_bridge" {
@@ -122,11 +126,16 @@ accompanimentIntro = \new Voice = "accompaniment_intro" {
   \skip 2. |
 }
 
-accompanimentTransition = \new Voice = "accompaniment_transition" {
+accompanimentTransitionZero = \new Voice = "accompaniment_transition_zero" {
   r4 \transpose a' a { \kidzukeba \itsudemo } \relative b { <b d>1 } |
   r4 \relative a { <a d g>8 <a d g>4 <a cs e>4. } |
   r4 \transpose a' a { \kidzukeba \itsudemo } \relative b { <b d>1 } |
   r4 \relative fs' { fs8 <a, d g>~<a d g>4 fs'8 <a, d a'> } |
+}
+
+
+accompanimentTransitionOne = \new Voice = "accompaniment_transition_one" {
+  \relative fs' { r4 fs4 b4. a8~a4 fs e fs e2.~e8 d8~d2~d8 }
 }
 
 
@@ -267,16 +276,22 @@ chordnames = \new ChordNames {
         \melodyIntro
         \repeat volta 2 {
           \melody
-          \melodyTransition
         }
+        \melodyTransitionZero
+        \melodyTransitionOne  % alternative
         \melodyBridge
         \break
         \melodyCoda
       }
       {
         \accompanimentIntro
-        \repeat unfold 41 { \skip1 }
-        \accompanimentTransition
+        \repeat volta 2 {
+          \repeat unfold 41 { \skip1 }
+        }
+        \alternative {
+          { \accompanimentTransitionZero }
+          { \accompanimentTransitionOne }
+        }
       }
     >>
     \new Lyrics \lyricsto "melody_intro" {
