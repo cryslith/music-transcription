@@ -1,9 +1,9 @@
 .PHONY: all clean
 
-all: sakura_kiss.pdf
+all: sakura_kiss.pdf hacking_to_the_gate.pdf
 
-sakura_kiss.pdf:
-	lilypond sakura_kiss.ly
+%.pdf: %.ly
+	lilypond $*.ly
 
 clean:
-	-rm sakura_kiss.pdf 2>/dev/null
+	-rm *.pdf 2>/dev/null
