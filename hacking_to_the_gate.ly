@@ -19,6 +19,11 @@ intro = \relative d' { << { \voiceOne | d1 | df | c | cf | }
                        | d2 e f g a bf cs e |
                      }
 
+suujuuokumono = \relative a' { | a4 f8 f4 d4 | e4 f8 g4. }
+kodounokazusae = \relative d' { d8 d | e4 c8 g'4 c,8 e4 | d2 }
+anataniwa = \relative d' { d4 f | g a8 g4. }
+matatakiteidono = \relative g' { g8 g a4 }  % TODO
+
 \score {
   \new Staff <<
     {
@@ -26,6 +31,8 @@ intro = \relative d' { << { \voiceOne | d1 | df | c | cf | }
       \key a \minor
       \time 4/4
       \intro
+      \suujuuokumono \kodounokazusae
+      \anataniwa \matatakiteidono
     }
   >>
 }
