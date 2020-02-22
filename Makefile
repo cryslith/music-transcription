@@ -1,6 +1,6 @@
 .PHONY: all clean
 
-all: sakura_kiss.pdf hacking_to_the_gate.pdf
+all: sakura_kiss.pdf hacking_to_the_gate.pdf mirror-magic.pdf
 
 %.pdf: %.ly
 	lilypond $*.ly
