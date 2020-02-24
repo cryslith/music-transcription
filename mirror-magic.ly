@@ -9,7 +9,7 @@
 harmonies = \chordmode { c\breve:m7 g:7- ef:/bf a:m7.5- af:maj7 g:m7 f:7 g:7 }
 % harmonies = \chordmode { c\breve:m9 g:7.13- ef:maj7/bf a:m7.5- af:maj7 g:m7 f:7 g:7 }
 
-saxophoneMusic = \relative c' {
+trumpetMusic = \relative c' {
   \key c \minor
   r1 |
   r2 c16 bf c8 ef16 f8 g16~ |
@@ -62,24 +62,24 @@ bassMusic = \relative c, {
     }
     \new StaffGroup <<
       \new Staff {
-        \set Staff.instrumentName = #"Saxophone"
-        \saxophoneMusic
+        \set Staff.instrumentName = #"Trumpet"
+        \trumpetMusic
       }
     >>
-    % \new DrumStaff <<
-    %   \set DrumStaff.instrumentName = #"Drumset"
-    %   \drumMusic
-    % >>
-    % \new PianoStaff <<
-    %   \set PianoStaff.instrumentName = #"Piano"
-    %   \new Staff { \pianoRHMusic }
-    %   \new Staff { \pianoLHMusic }
-    % >>
-    % \new StaffGroup <<
-    %   \new Staff {
-    %     \set Staff.instrumentName = #"Electric Bass"
-    %     \bassMusic
-    %   }
-    % >>
+    \new DrumStaff <<
+      \set DrumStaff.instrumentName = #"Drumset"
+      \drumMusic
+    >>
+    \new PianoStaff <<
+      \set PianoStaff.instrumentName = #"Piano"
+      \new Staff { \pianoRHMusic }
+      \new Staff { \pianoLHMusic }
+    >>
+    \new StaffGroup <<
+      \new Staff {
+        \set Staff.instrumentName = #"Electric Bass"
+        \bassMusic
+      }
+    >>
   >>
 }
