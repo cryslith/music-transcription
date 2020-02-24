@@ -6,8 +6,18 @@
   composer = "2 Mello"
 }
 
-harmonies = \chordmode { c\breve:m7 g:7- ef:/bf a:m7.5- af:maj7 g:m7 f:7 g:7 }
-% harmonies = \chordmode { c\breve:m9 g:7.13- ef:maj7/bf a:m7.5- af:maj7 g:m7 f:7 g:7 }
+harmonies = \chordmode {
+  \tempo 4 = 98
+  \set Score.markFormatter = #format-mark-box-alphabet
+  \mark \default
+  c\breve:m7 g:7- ef:/bf a:m7.5- af:maj7 g:m7 f:7 g:7
+  % c\breve:m9 g:7.13- ef:maj7/bf a:m7.5- af:maj7 g:m7 f:7 g:7
+  % \repeat unfold 5 {
+  %   \mark \default
+  %   R1*16
+  % }
+}
+% harmonies = \chordmode { }
 
 trumpetMusic = \relative c' {
   \key c \minor
@@ -46,12 +56,22 @@ pianoLHMusic = \relative c { \clef bass \key c \minor R1*16 }
 
 bassMusic = \relative c, {
   \clef "bass_8" \key c \minor
-  c8. bf c8~c4~c16 g bf g |
-  c8. bf c8~c4~c16 f, bf f |
-  g=,,8. g g8~g4~g16 f bf f |
-  g8. g g8~g8 g16 ef~ef4 |
-  bf'=,,8. bf bf8 r2 |
-  R1*11
+  c8. bf-. c8~c4 r16 g bf g |
+  c8. bf-. c8~c4 r16 g bf f |
+  g=,,8. g-. g8~g4 r16 g bf f |
+  g8. g-. g8~g8 g16 ef~ef4 |
+  bf'8. bf-. bf8~bf4 r16 ef, g ef |
+  bf'8. bf-. bf8~bf4 r16 ef, f ef |
+  a8. a-. a8~a4 r16 ef f ef |
+  a8. a-. a8~a4 r16 ef f ef |
+  af8. af-. af8~af4 r16 ef f ef |
+  af8. af-. af8~af4 r16 ef f ef |
+  g8. g-. g8~g4 r16 ef f ef |
+  g8. g-. g8~g4 r16 ef f ef |
+  f8. f-. f8~f4 r16 ef f ef |
+  f8. f-. f8~f4 r16 ef f ef |
+  g8. g-. g8~g4 r16 ef f ef |
+  g=,,8. b-. d8~d4 r4 |
 }
 
 
@@ -66,14 +86,14 @@ bassMusic = \relative c, {
         \trumpetMusic
       }
     >>
-    \new DrumStaff <<
-      \set DrumStaff.instrumentName = #"Drumset"
-      \drumMusic
-    >>
     \new PianoStaff <<
       \set PianoStaff.instrumentName = #"Piano"
       \new Staff { \pianoRHMusic }
       \new Staff { \pianoLHMusic }
+    >>
+    \new DrumStaff <<
+      \set DrumStaff.instrumentName = #"Drumset"
+      \drumMusic
     >>
     \new StaffGroup <<
       \new Staff {
