@@ -12,10 +12,12 @@ harmonies = \chordmode {
   \mark \default
   c\breve:m7 g:7- ef:/bf a:m7.5- af:maj7 g:m7 f:7 g:7
   % c\breve:m9 g:7.13- ef:maj7/bf a:m7.5- af:maj7 g:m7 f:7 g:7
-  % \repeat unfold 5 {
-  %   \mark \default
-  %   R1*16
-  % }
+  \repeat unfold 5 {
+    \break
+    \mark \default
+    R1*16
+  }
+  \bar "|."
 }
 % harmonies = \chordmode { }
 
@@ -36,10 +38,90 @@ trumpetMusic = \relative c' {
   d16 c8. r4 r8 c16 d ef c8 g'16~
   | g16 c,8. r4 r8 gf' f16 ef8 f16~ |
   f4 r2 r8. ef16 |
-  f8 ef16 f16~f ef16 g8~g16 f8.~f4 |
+  f='8 ef16 f16~f ef16 g8~g16 f8.~f4 |
 }
 
-drumMusic = \drummode { R1*16 }
+lowBeat = \drummode {
+  bd8. bd16 sn8 bd r bd sn8. bd16
+}
+
+ridePattern = \drummode {
+  cymr8 cymr cymr r cymr cymr
+}
+
+drumMusic = \drummode {
+  \repeat percent 15 { \repeat unfold 2 { hh8 hh hho hh } | }
+  hh8 hh hho hh hh toml <sn tomh>16 <sn tomh> toml8 |
+
+  \repeat percent 15 {
+    <<
+      { \repeat unfold 8 { hh8 } }
+      \\
+      { \lowBeat }
+    >> |
+  }
+  <<
+    { hh8 hh hh hh hh s4. }
+    \\
+    { bd8. bd16 sn8 bd r toml <sn tomh>16 <sn tomh> toml16 bd }
+  >> |
+
+  \repeat unfold 2 {
+    % <<
+    %   { cymc8 cymr \ridePattern |
+    %     r8 hh \ridePattern |
+    %     r8 hh \ridePattern |
+    %     cymr8 hh \ridePattern |
+    %   }
+    %   \\
+    %   { \repeat percent 4 { \lowBeat | } }
+    % >> |
+
+    \repeat percent 4 {
+      <<
+        {
+          cymr8^"Crash" cymr \ridePattern |
+          r8 hh \ridePattern |
+          r8 hh \ridePattern |
+          cymr8 hh \ridePattern |
+        }
+        \\
+        { \repeat percent 4 { \lowBeat | } }
+      >>
+    }
+  }
+
+
+  \repeat percent 3 {
+    <<
+      {
+        cymr8^"Crash" cymr \ridePattern |
+        r8 hh \ridePattern |
+        r8 hh \ridePattern |
+        cymr8 hh \ridePattern |
+      }
+      \\
+      { \repeat percent 4 { \lowBeat | } }
+    >>
+  }
+  <<
+    {
+      cymr8 cymr \ridePattern |
+      r8 hh \ridePattern |
+      r8 hh \ridePattern |
+      cymr8 hh cymr cymr cymr s4. |
+    }
+    \\
+    { \repeat percent 3 { \lowBeat | }
+      bd8. bd16 sn8 bd r toml <sn tomh>16 <sn tomh> toml8 }
+  >> |
+
+  cymc8 hh hho hh hh hh hho hh |
+  \repeat percent 14 {
+    \repeat unfold 2 { hh8 hh hho hh } |
+  }
+  r1 |
+}
 
 pianoRHMusic = \relative g' {
   \key c \minor
@@ -50,7 +132,7 @@ pianoRHMusic = \relative g' {
     \repeat percent 2 { r8 g, d' ef g d ef g | }
   }
   r8 b, d ef g d ef g |
-  r8 b, d4 <g, b>8. <g b> <b d>8 |
+  r8 b,= d4 <g, b>8. <g b> <b d>8 |
 }
 pianoLHMusic = \relative c { \clef bass \key c \minor R1*16 }
 
@@ -58,7 +140,8 @@ bassMusic = \relative c, {
   \clef "bass_8" \key c \minor
   c8. bf-. c8~c4 r16 g bf g |
   c8. bf-. c8~c4 r16 g bf f |
-  g=,,8. g-. g8~g4 r16 g bf f |
+  % i think the high-low-high pattern continues - retranscribe later
+  g8. g-. g8~g4 r16 g bf f |
   g8. g-. g8~g8 g16 ef~ef4 |
   bf'8. bf-. bf8~bf4 r16 ef, g ef |
   bf'8. bf-. bf8~bf4 r16 ef, f ef |
