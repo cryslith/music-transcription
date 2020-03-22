@@ -123,7 +123,7 @@ drumMusic = \drummode {
   r1 |
 }
 
-pianoRHMusic = \relative g' {
+pianoRHMusic = \relative g'' {
   \key c \minor
   \repeat percent 2 { r8 g, d' ef bf' d, ef bf' | }
   \repeat percent 2 { r8 g, d' ef g d ef g | }
@@ -132,29 +132,36 @@ pianoRHMusic = \relative g' {
     \repeat percent 2 { r8 g, d' ef g d ef g | }
   }
   r8 b, d ef g d ef g |
-  r8 b,= d4 <g, b>8. <g b> <b d>8 |
+  r8 b,=' d4 <g, b>8. <g b> <b d>8 |
 }
-pianoLHMusic = \relative c { \clef bass \key c \minor R1*16 }
+pianoLHMusic = \relative c' {
+  \clef bass \key c \minor
+  R1*16
+}
 
 bassMusic = \relative c, {
   \clef "bass_8" \key c \minor
-  c8. bf-. c8~c4 r16 g bf g |
-  c8. bf-. c8~c4 r16 g bf f |
-  % i think the high-low-high pattern continues - retranscribe later
-  g8. g-. g8~g4 r16 g bf f |
-  g8. g-. g8~g8 g16 ef~ef4 |
-  bf'8. bf-. bf8~bf4 r16 ef, g ef |
-  bf'8. bf-. bf8~bf4 r16 ef, f ef |
-  a8. a-. a8~a4 r16 ef f ef |
-  a8. a-. a8~a4 r16 ef f ef |
-  af8. af-. af8~af4 r16 ef f ef |
-  af8. af-. af8~af4 r16 ef f ef |
-  g8. g-. g8~g4 r16 ef f ef |
-  g8. g-. g8~g4 r16 ef f ef |
-  f8. f-. f8~f4 r16 ef f ef |
-  f8. f-. f8~f4 r16 ef f ef |
-  g8. g-. g8~g4 r16 ef f ef |
-  g=,,8. b-. d8~d4 r4 |
+  \repeat unfold 6 {
+    c8. bf-. c8~c4 r16 g bf g |
+    c8. bf-. c8~c4 r16 g bf f |
+    g8. g-. g8~g4 r16 g bf f |
+    g8. g-. g8~g8 g16 ef~ef4 |
+    bf'8. bf-. bf8~bf4 r16 ef, g ef |
+    bf'8. bf-. bf8~bf4 r16 ef, f ef |
+    a8. g-. a8~a4 r16 ef f ef |
+    a8. g-. a8~a4 r16 ef f ef |
+    af8. af-. af8~af4 r16 ef f ef |
+    af8. af-. af8~af4 r16 ef f ef |
+    g8. g-. g8~g4 r16 ef f ef |
+    g8. g-. g8~g4 r16 ef f ef |
+    f8. f-. f8~f4 r16 ef f ef |
+    f8. f-. f8~f4 r16 ef f ef |
+    g8. g-. g8~g4 r16 ef f ef |
+  }
+  \alternative {
+    { g=,,8. b-. d8~d4 r4 | }
+    { r1 | }
+  }
 }
 
 
