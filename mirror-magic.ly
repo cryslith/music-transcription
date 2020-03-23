@@ -112,16 +112,6 @@ drumMusic = \drummode {
   >> |
 
   \repeat unfold 2 {
-    % <<
-    %   { cymc8 cymr \ridePattern |
-    %     r8 hh \ridePattern |
-    %     r8 hh \ridePattern |
-    %     cymr8 hh \ridePattern |
-    %   }
-    %   \\
-    %   { \repeat percent 4 { \lowBeat | } }
-    % >> |
-
     \repeat percent 4 {
       <<
         {
@@ -135,7 +125,6 @@ drumMusic = \drummode {
       >>
     }
   }
-
 
   \repeat percent 3 {
     <<
