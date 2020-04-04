@@ -159,18 +159,46 @@ drumMusic = \drummode {
 
 pianoRHMusic = \relative g'' {
   \key c \minor
-  \repeat percent 2 { r8 g, d' ef bf' d, ef bf' | }
-  \repeat percent 2 { r8 g, d' ef g d ef g | }
-  \repeat percent 2 { r8 g, d' ef bf' d, ef bf' | }
-  \repeat percent 4 {
+  \repeat unfold 4 {
+    \repeat percent 2 { r8 g, d' ef bf' d, ef bf' | }
     \repeat percent 2 { r8 g, d' ef g d ef g | }
+    \repeat percent 2 { r8 g, d' ef bf' d, ef bf' | }
+    \repeat percent 4 {
+      \repeat percent 2 { r8 g, d' ef g d ef g | }
+    }
   }
-  r8 b, d ef g d ef g |
-  r8 b,=' d4 <g, b>8. <g b> <b d>8 |
+  \alternative {
+    {
+      r8 b,=' d ef g d ef g |
+      r8 b,=' d4 <g, b>8. <g b> <b d>8 |
+    }
+    { \repeat percent 2 { r8 b=' d ef g d ef g | } }
+    { \repeat percent 2 { r8 b,=' d ef g d ef g | } }
+    { \repeat percent 2 { r8 b,=' d ef g d ef g | } }
+  }
 }
-pianoLHMusic = \relative c' {
+pianoLHMusic = \relative c {
   \clef bass \key c \minor
-  R1*16
+  \repeat unfold 4 {
+    <c c'>1 | c |
+    <b b'> | b |
+    <bf bf'> | bf
+    <a a'>1 | a |
+    <af af'>1 | af |
+    <g g'>1 | g |
+    <f f'>1 | f |
+    <g g'>1 | g |
+  }
+}
+
+pianoOffbeatMusic = \relative g' {
+  \key c \minor
+  \repeat unfold 8 { r16[ g16-. r16 g16-.] } |
+  \repeat unfold 2 { r16[ f16-. r16 f16-.] }
+  r16[ f16-. r16 g16-.] r16[ f16-. r16 f16-.] |
+  \repeat unfold 4 { r16[ f16-. r16 f16-.] } |
+  \repeat unfold 8 { r16[ ef16-. r16 ef16-.] } |
+  \repeat unfold 8 { r16[ c16-. r16 c16-.] } |
 }
 
 bassMusic = \relative c, {
@@ -212,6 +240,10 @@ bassMusic = \relative c, {
     >>
     \new PianoStaff <<
       \set PianoStaff.instrumentName = #"Piano"
+      \new Staff { \pianoOffbeatMusic }
+    >>
+    \new PianoStaff <<
+      \set PianoStaff.instrumentName = #"Piano 2"
       \new Staff { \pianoRHMusic }
       \new Staff { \pianoLHMusic }
     >>
