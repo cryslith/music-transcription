@@ -6,6 +6,10 @@
   composer = "2 Mello"
 }
 
+\paper {
+  left-margin = 2\cm
+}
+
 harmonies = \chordmode {
   \tempo 4 = 98
   \set Score.markFormatter = #format-mark-box-alphabet
@@ -19,7 +23,6 @@ harmonies = \chordmode {
   }
   \bar "|."
 }
-% harmonies = \chordmode { }
 
 trumpetVerseA =
 #(define-music-function (parser location breakNotes)
@@ -82,8 +85,6 @@ trumpetMusic = \relative c' {
     c8 ef16 f16~f ef8 d16~d bf8 g16~g8 bf16 c16~ |
     c2.
   }
-
-  R1*16
 }
 
 lowBeat = \drummode {
@@ -106,49 +107,52 @@ drumMusic = \drummode {
     >> |
   }
   <<
-    { hh8 hh hh hh hh s4. }
+    { hh8 hh hh hh hh r4. }
     \\
     { bd8. bd16 sn8 bd r toml <sn tomh>16 <sn tomh> toml16 bd }
   >> |
 
   \repeat unfold 2 {
-    \repeat percent 4 {
-      <<
-        {
-          cymr8^"Crash" cymr \ridePattern |
+    <<
+      {
+        cymc8 cymr \ridePattern |
+        r8 hh \ridePattern |
+        r8 hh \ridePattern |
+        cymr8 hh \ridePattern |
+        \repeat unfold 3 {
+          cymr8 cymr \ridePattern |
           r8 hh \ridePattern |
           r8 hh \ridePattern |
           cymr8 hh \ridePattern |
         }
-        \\
-        { \repeat percent 4 { \lowBeat | } }
-      >>
-    }
-  }
-
-  \repeat percent 3 {
-    <<
-      {
-        cymr8^"Crash" cymr \ridePattern |
-        r8 hh \ridePattern |
-        r8 hh \ridePattern |
-        cymr8 hh \ridePattern |
       }
       \\
-      { \repeat percent 4 { \lowBeat | } }
+      { \repeat percent 16 { \lowBeat | } }
     >>
   }
+
   <<
     {
-      cymr8 cymr \ridePattern |
+      cymc8 cymr \ridePattern |
       r8 hh \ridePattern |
       r8 hh \ridePattern |
-      cymr8 hh cymr cymr cymr s4. |
+      cymr8 hh \ridePattern |
+      \repeat unfold 3 {
+        cymr8 cymr \ridePattern |
+        r8 hh \ridePattern |
+        r8 hh \ridePattern |
+      }
+      \alternative {
+        { cymr8 hh \ridePattern | }
+        { cymr8 hh cymr cymr cymr r4. | }
+      }
     }
     \\
-    { \repeat percent 3 { \lowBeat | }
-      bd8. bd16 sn8 bd r toml <sn tomh>16 <sn tomh> toml8 }
-  >> |
+    {
+      \repeat percent 15 { \lowBeat | }
+      bd8. bd16 sn8 bd r toml <sn tomh>16 <sn tomh> toml8 |
+    }
+  >>
 
   cymc8 hh hho hh hh hh hho hh |
   \repeat percent 14 {
@@ -193,12 +197,26 @@ pianoLHMusic = \relative c {
 
 pianoOffbeatMusic = \relative g' {
   \key c \minor
-  \repeat unfold 8 { r16[ g16-. r16 g16-.] } |
-  \repeat unfold 2 { r16[ f16-. r16 f16-.] }
-  r16[ f16-. r16 g16-.] r16[ f16-. r16 f16-.] |
-  \repeat unfold 4 { r16[ f16-. r16 f16-.] } |
-  \repeat unfold 8 { r16[ ef16-. r16 ef16-.] } |
-  \repeat unfold 8 { r16[ c16-. r16 c16-.] } |
+  \repeat unfold 4 {
+    \repeat unfold 8 { r16[ g-. r g-.] } |
+    r[ f-. r f-.] r[ f-. r f-.] r[ f-. r g-.] r[ f-. r f-.] |
+    \repeat unfold 4 { r[ f-. r f-.] } |
+    \repeat unfold 8 { r[ ef-. r ef-.] } |
+    \repeat unfold 8 { r[ c-. r c-.] } |
+    \repeat unfold 3 { r[ c-. r c-.] } r[ d-. r d-.] |
+    r[ ef-. r ef-.] r[ ef-. r ef-.] r[ f-. r f-.] r[ g-. r g-. ] |
+    r[ d-. r d-.] r[ bf-. r d-.] r[ bf-. r d-.] r[ ef-. r d-.] |
+    \repeat unfold 3 { r[ bf-. r d-.] } r[ c-. r d-.]
+    r[ c-. r c-.] r[ c-. r c-.] r[ d-. r d-.] r[ d-. r d-.] |
+    r[ ef-. r ef-.] r[ ef-. r ef-.] r[ f-. r f-.] r[ gf-. r gf-.] |
+    \repeat unfold 4 { r[ g-. r g-.] } |
+  }
+  \alternative {
+    { r16[ b-. r b-.] r2.  | }
+    { \repeat unfold 3 { r16[ b-. r b-.] } r[ c-. r c-.] | }
+    { \repeat unfold 3 { r16[ b-. r b-.] } r[ c-. r c-.] | }
+    { \repeat unfold 3 { r16[ b-. r b-.] } r[ c-. r c-.] | }
+  }
 }
 
 bassMusic = \relative c, {
@@ -233,29 +251,44 @@ bassMusic = \relative c, {
       \harmonies
     }
     \new StaffGroup <<
-      \new Staff {
-        \set Staff.instrumentName = #"Trumpet"
+      \new Staff \with {
+        instrumentName = #"Trumpet "
+        shortInstrumentName = #"Tpt. "
+      }
+      {
         \trumpetMusic
       }
     >>
-    \new PianoStaff <<
-      \set PianoStaff.instrumentName = #"Piano"
-      \new Staff { \pianoOffbeatMusic }
-    >>
-    \new PianoStaff <<
-      \set PianoStaff.instrumentName = #"Piano 2"
+    \new PianoStaff \with {
+      instrumentName = #"Piano 1 "
+      shortInstrumentName = #"Pno. 1 "
+    } {
+      \pianoOffbeatMusic
+    }
+    \new PianoStaff \with {
+      instrumentName = #"Piano 2 "
+      shortInstrumentName = #"Pno. 2 "
+    } <<
       \new Staff { \pianoRHMusic }
       \new Staff { \pianoLHMusic }
     >>
-    \new DrumStaff <<
-      \set DrumStaff.instrumentName = #"Drumset"
+    \new DrumStaff \with {
+      instrumentName = #"Drumset "
+      shortInstrumentName = #"Drm. "
+    } {
       \drumMusic
-    >>
-    \new StaffGroup <<
-      \new Staff {
-        \set Staff.instrumentName = #"Electric Bass"
-        \bassMusic
-      }
-    >>
+    }
+    \new Staff \with {
+      instrumentName = #"Electric Bass "
+      shortInstrumentName = #"E.B. "
+    } {
+      \set Staff.instrumentName = #"Electric Bass"
+      \bassMusic
+    }
   >>
+  \layout {
+    \context {
+      \Staff \RemoveEmptyStaves
+    }
+  }
 }
