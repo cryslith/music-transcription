@@ -14,8 +14,7 @@ harmonies = \chordmode {
   \tempo 4 = 98
   \set Score.markFormatter = #format-mark-box-alphabet
   \mark \default
-  c\breve:m7 g:7- ef:/bf a:m7.5- af:maj7 g:m7 f:7 g:7
-  % c\breve:m9 g:7.13- ef:maj7/bf a:m7.5- af:maj7 g:m7 f:7 g:7
+  c\breve:m7 g:7 ef:/bf a:m7.5- af:maj7 g:m f:9 g:7
   \repeat unfold 5 {
     \break
     \mark \default
