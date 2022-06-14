@@ -28,8 +28,8 @@ trumpetVerseA =
   (ly:music?)
   #{
   c16 bf c8 ef16 f8 g16~ |
-  g2 r4 g16 c8 f,16~\turn
-  f4 ef16 c8 bf16 c8 ef d16 bf8 g16~ |
+  g2 r4 g16 c8 f,16 |
+  \tuplet 3/2 { gf f ef } f8 ef16 c8 bf16 c8 ef d16 bf8 g16~ |
   g2 r16
 
   #breakNotes
@@ -37,10 +37,10 @@ trumpetVerseA =
   r8. ef,16 |
   f8 ef16 f16~f ef16 g8~g bf,16 c ef g ef f~ |
   f2 r8 bf,16 c ef bf'8 f16~ |
-  f2 bf8 af g16 ef8 c16~ |
+  f2 bf8 af g16 ef8 \acciaccatura b8 c16~ |
   c16 bf8.~bf4 r4 \tuplet 3/2 { c8 ef f } |
   d8 bf16 ef d bf8. r8 c d16 c8 d16~ |
-  d16 c8. r4 r8 c16 d ef c8 g'16~
+  d16 c8. r4 r8 c16 df d c8 g'16~
   | g16 c,8. r4 r8 gf' f16 ef8 f16~ |
   f4 r2 r8. ef16 |
   f='8 ef16 f16~f ef16 g8~g16 f8.~f4 |
@@ -73,7 +73,7 @@ trumpetMusic = \relative c' {
   b1 |
   c2 g4 f |
   ef d
-  b cf |
+  b c |
   ef1 |
   d1 |
 
